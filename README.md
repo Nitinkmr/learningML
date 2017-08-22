@@ -1,6 +1,13 @@
 # learning ML
 
 Notes for Udacity's Intro to Machine Learning Course
+## Supervised learning
+In supervised learning, we are provided with a set of training data, wherein each entry consistes 
+of some elements describing that entry (features) and an output value (label) to which input elements
+collectively belong. There are basically 3 supervised classification Algorithms:
+ * Naive Bayes classifier
+ * SVM (Support vector machines)
+ * Decision Trees
 
 ## Problem of Overfitting
 If we make our algorithm too strong (many polynomial features), it will be very sensitive to even small fluctuations in our training
@@ -9,14 +16,23 @@ In overfitting, the decision boundary tends to become complex when a simple deci
 As in the following image, a simple linear decision boundary is possible but the algorithm
 gave a complex one.
 
-![alt text](https://i.stack.imgur.com/yhkx4.jpg)
+![under fitting and over fitting](https://i.stack.imgur.com/yhkx4.jpg)
 
-### Prerequisites
+## Decision Trees
+Decision trees lets you do a non-linear decision making with simple linear decision surfaces.
+for eg. in the below figure the red objects could be defined to belong to 2 linear surfaces:
+x>=w10 and y >=w20
+![decesion tree](https://image.slidesharecdn.com/lecture02ml4ltmarinasantini2013-130827052029-phpapp02/95/lecture-02-machine-learning-for-language-technology-decision-trees-and-nearest-neighbors-10-638.jpg?cb=1378716784)
 
-What things you need to install the software and how to install them
-
+Decision tree started code:
 ```
-Give examples
+ from sklearn import tree
+ # X is a an array with each index representing features for that data
+ X = [[0, 0], [1, 1]]
+ # each element in Y represents the label to which the corresponding element in X belongs
+ Y = [0, 1]
+ clf = tree.DecisionTreeClassifier()
+ clf = clf.fit(X, Y)
 ```
 
 ### Installing

@@ -24,6 +24,8 @@ for eg. in the below figure the red objects could be defined to belong to 2 line
 x>=w10 and y >=w20
 ![decesion tree](https://image.slidesharecdn.com/lecture02ml4ltmarinasantini2013-130827052029-phpapp02/95/lecture-02-machine-learning-for-language-technology-decision-trees-and-nearest-neighbors-10-638.jpg?cb=1378716784)
 
+the root if the tree consists of all the training examples. we keep breaking it into sub nodes each having a subset of it's parent's training examples.
+
 Decision tree started code:
 ```
  from sklearn import tree
@@ -33,69 +35,39 @@ Decision tree started code:
  Y = [0, 1]
  clf = tree.DecisionTreeClassifier()
  clf = clf.fit(X, Y)
+ # below line will predict labels for the given features
+ clf.predict([[2., 2.]])
 ```
 
-### Installing
-
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
+prototype of the Decision tree classifer function :
 
 ```
-Give the example
+DecisionTreeClassifier(criterion=’gini’, splitter=’best’, max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features=None, random_state=None, max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, class_weight=None, presort=False)
 ```
 
-And repeat
+the min_samples_split argument decides if we can split a node further or not. we can split 
+only if the no of training examples in that node is greater than or equal to min_samples_split
+the lower the value of this argument, the higher the chance of getting a overfitting decision
+boundary because then the decision boundary will try to cover every input point (even if
+it is far from all the other points) and thus making the decision boundary look complex.
 
-```
-until finished
-```
 
-End with an example of getting some data out of the system or using it for a little demo
 
-## Running the tests
 
-Explain how to run the automated tests for this system
+## The above content is mainly derived from the following links
 
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Intro to Machine Learning](https://in.udacity.com/course/intro-to-machine-learning--ud120/?) - Machine learning course for beginners by udacity
+* [Scikit Documentation](http://scikit-learn.org/stable/index.html) - Scikit Library
 
 ## Contributing
 
 Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Nitin Kumar** - *Initial work* - [Github](https://github.com/Nitinkmr)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 

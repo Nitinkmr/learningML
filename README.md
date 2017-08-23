@@ -1,6 +1,5 @@
 # learning ML
 
-Notes for Udacity's Intro to Machine Learning Course
 ## Supervised learning
 In supervised learning, we are provided with a set of training data, wherein each entry consistes 
 of some elements describing that entry (features) and an output value (label) to which input elements
@@ -24,9 +23,9 @@ for eg. in the below figure the red objects could be defined to belong to 2 line
 x>=w10 and y >=w20
 ![decesion tree](https://image.slidesharecdn.com/lecture02ml4ltmarinasantini2013-130827052029-phpapp02/95/lecture-02-machine-learning-for-language-technology-decision-trees-and-nearest-neighbors-10-638.jpg?cb=1378716784)
 
-the root if the tree consists of all the training examples. we keep breaking it into sub nodes each having a subset of it's parent's training examples.
+the root of the tree consists of all the training examples. we keep breaking it into sub nodes each having a subset of it's parent's training examples.
 
-Decision tree started code:
+Decision tree starter code:
 ```
  from sklearn import tree
  # X is a an array with each index representing features for that data

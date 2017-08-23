@@ -51,7 +51,18 @@ boundary because then the decision boundary will try to cover every input point 
 it is far from all the other points) and thus making the decision boundary look complex.
 
 
+### Entropy
+It controls how a decision tree decides where to split the data. It is a measure of impurity in a bunch
+of examples.
+What we try to do is to find variables and split points along those variables which will basically make subsets
+that are as pure as possible (basically we try to make decision boundaries that enclose areas which have
+points belonging to only 1 class i.e. least entropy or maximum purity)
+Formula:<br>
+![Entropy formula](https://i.stack.imgur.com/vIFD7.png)<br>
+where pi is the fraction of the ith class in the given examples.
+Maximum value of entropy is 1 (eg. 4 training examples having 2 examples for labelA and 2 for labelB)
 
+For better understanding of Entropy and information gain refer this [link](https://stackoverflow.com/questions/1859554/what-is-entropy-and-information-gain)
 
 ## The above content is mainly derived from the following links
 

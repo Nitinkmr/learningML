@@ -3,7 +3,7 @@
 ## Supervised learning
 In supervised learning, we are provided with a set of training data, wherein each entry consistes 
 of some elements describing that entry (features) and an output value (label) to which input elements
-collectively belong. There are basically 3 supervised classification Algorithms:
+collectively belong. If the output is expressed in some classes, it is called supervised classification and if the output is continuous, it is called supervised regiression. There are basically 3 supervised classification Algorithms:
  * Naive Bayes classifier
  * SVM (Support vector machines)
  * Decision Trees

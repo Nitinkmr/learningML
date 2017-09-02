@@ -1,6 +1,6 @@
 
 '''
-Given some points from 3 distinct spirals, the code below trains a linear classifier on these points
+given some points from 3 distinct spirals, this file tries to classify a given point into 1 of the 3 spirals
 '''
 
 

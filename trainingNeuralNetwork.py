@@ -1,8 +1,7 @@
 
 '''
-Given some points from 3 distinct spirals, the code below trains a linear classifier on these points
+Given some points from 3 distinct spirals.The code below trains a 2 layer neural network on these points
 '''
-
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -28,11 +27,12 @@ for j in xrange(K):
 plt.scatter(X[:, 0], X[:, 1], c=y, s=40 ,cmap=plt.cm.Spectral)
 plt.show()
 
-#Train a Linear Classifier
-
 # initialize parameters randomly
-W = 0.01 * np.random.randn(D,K)
-b = np.zeros((1,K))
+h = 100 # size of hidden layer
+W = 0.01 * np.random.randn(D,h)
+b = np.zeros((1,h))
+W2 = 0.01 * np.random.randn(h,K)
+b2 = np.zeros((1,K))
 
 # some hyperparameters
 step_size = 1e-0
@@ -40,10 +40,11 @@ reg = 1e-3 # regularization strength
 
 # gradient descent loop
 num_examples = X.shape[0]
-for i in xrange(700):
+for i in xrange(10000):
   
   # evaluate class scores, [N x K]
-  scores = np.dot(X, W) + b 
+  hidden_layer = np.maximum(0, np.dot(X, W) + b) # note, ReLU activation
+  scores = np.dot(hidden_layer, W2) + b2
   
   # compute the class probabilities
   exp_scores = np.exp(scores)
@@ -52,28 +53,40 @@ for i in xrange(700):
   # compute the loss: average cross-entropy loss and regularization
   corect_logprobs = -np.log(probs[range(num_examples),y])
   data_loss = np.sum(corect_logprobs)/num_examples
-  reg_loss = 0.5*reg*np.sum(W*W)
+  reg_loss = 0.5*reg*np.sum(W*W) + 0.5*reg*np.sum(W2*W2)
   loss = data_loss + reg_loss
-  if i%10 == 0:
-  	print "iteration %d: loss %f" % (i, loss)
+  if i % 1000 == 0:
+    print "iteration %d: loss %f" % (i, loss)
   
   # compute the gradient on scores
   dscores = probs
   dscores[range(num_examples),y] -= 1
   dscores /= num_examples
   
-  # backpropate the gradient to the parameters (W,b)
-  dW = np.dot(X.T, dscores)
-  db = np.sum(dscores, axis=0, keepdims=True)
+  # backpropate the gradient to the parameters
+  # first backprop into parameters W2 and b2
+  dW2 = np.dot(hidden_layer.T, dscores)
+  db2 = np.sum(dscores, axis=0, keepdims=True)
+  # next backprop into hidden layer
+  dhidden = np.dot(dscores, W2.T)
+  # backprop the ReLU non-linearity
+  dhidden[hidden_layer <= 0] = 0
+  # finally into W,b
+  dW = np.dot(X.T, dhidden)
+  db = np.sum(dhidden, axis=0, keepdims=True)
   
-  dW += reg*W # regularization gradient
+  # add regularization gradient contribution
+  dW2 += reg * W2
+  dW += reg * W
   
   # perform a parameter update
   W += -step_size * dW
   b += -step_size * db
+  W2 += -step_size * dW2
+  b2 += -step_size * db2
 
-
-scores = np.dot(X, W) + b
-predicted_class = np.argmax(scores, axis=1) # returns index with maximum element from each row 
-
+# evaluate training set accuracy
+hidden_layer = np.maximum(0, np.dot(X, W) + b)
+scores = np.dot(hidden_layer, W2) + b2
+predicted_class = np.argmax(scores, axis=1)
 print 'training accuracy: %.2f' % (np.mean(predicted_class == y))
